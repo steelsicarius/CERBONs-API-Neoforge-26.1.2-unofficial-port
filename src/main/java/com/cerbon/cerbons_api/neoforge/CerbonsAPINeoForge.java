@@ -2,7 +2,7 @@ package com.cerbon.cerbons_api.neoforge;
 
 import com.cerbon.cerbons_api.CerbonsAPI;
 import com.cerbon.cerbons_api.api.network.CommonNetwork;
-import com.cerbon.cerbons_api.api.network.PacketRegistrationHandler;
+
 import com.cerbon.cerbons_api.api.network.data.Side;
 import com.cerbon.cerbons_api.neoforge.network.NeoForgeClientNetworkHandler;
 import com.cerbon.cerbons_api.neoforge.network.NeoForgeNetworkHandler;
@@ -14,7 +14,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 
 @Mod(Constants.MOD_ID)
 public class CerbonsAPINeoForge {
-    private final PacketRegistrationHandler handler;
+    private final NeoForgeNetworkHandler handler;
 
     public CerbonsAPINeoForge(IEventBus modEventBus) {
         CerbonsAPI.init();
