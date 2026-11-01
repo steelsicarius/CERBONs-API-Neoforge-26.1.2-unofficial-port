@@ -12,6 +12,7 @@
     "multipart_entities.VoxelShapeMixin"
   ],
   "client": [
+    "multipart_entities.client.EntityHitboxDebugRendererMixin",
     "multipart_entities.client.MultiplayerGameModeMixin"
   ],
   "injectors": {
