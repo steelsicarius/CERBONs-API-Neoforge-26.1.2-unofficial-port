@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -51,7 +52,7 @@ public abstract class MultiplayerGameModeMixin {
     }
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
-    private void interactHook(final Player player, final Entity entity, final InteractionHand hand, final CallbackInfoReturnable<InteractionResult> cir) {
+    private void interactHook(final Player player, final Entity entity, final EntityHitResult hitResult, final InteractionHand hand, final CallbackInfoReturnable<InteractionResult> cir) {
         if (entity instanceof MultipartAwareEntity multipartAwareEntity) {
             ensureHasSentCarriedItem();
 
