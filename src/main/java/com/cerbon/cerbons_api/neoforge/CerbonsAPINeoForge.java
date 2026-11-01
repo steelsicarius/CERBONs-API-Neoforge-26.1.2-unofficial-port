@@ -4,6 +4,7 @@ import com.cerbon.cerbons_api.CerbonsAPI;
 import com.cerbon.cerbons_api.api.network.CommonNetwork;
 import com.cerbon.cerbons_api.api.network.PacketRegistrationHandler;
 import com.cerbon.cerbons_api.api.network.data.Side;
+import com.cerbon.cerbons_api.neoforge.network.NeoForgeClientNetworkHandler;
 import com.cerbon.cerbons_api.neoforge.network.NeoForgeNetworkHandler;
 import com.cerbon.cerbons_api.util.Constants;
 import net.neoforged.bus.api.IEventBus;
@@ -21,6 +22,9 @@ public class CerbonsAPINeoForge {
         modEventBus.addListener(this::commonSetupEvent);
         handler = new NeoForgeNetworkHandler(FMLEnvironment.getDist().isClient() ? Side.CLIENT : Side.SERVER);
         modEventBus.register(handler);
+
+        if (FMLEnvironment.getDist().isClient())
+            modEventBus.register(new NeoForgeClientNetworkHandler(handler));
     }
 
     public void commonSetupEvent(FMLCommonSetupEvent event) {

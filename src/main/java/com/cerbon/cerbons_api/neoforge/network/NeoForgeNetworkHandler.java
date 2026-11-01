@@ -16,6 +16,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class NeoForgeNetworkHandler extends PacketRegistrationHandler {
@@ -27,6 +28,10 @@ public class NeoForgeNetworkHandler extends PacketRegistrationHandler {
     @Override
     protected <T> void registerPacket(PacketContainer<T> container) {
         // not needed for neoforge
+    }
+
+    Map<Class<?>, PacketContainer<?>> getPacketMap() {
+        return PACKET_MAP;
     }
 
     @SubscribeEvent
@@ -61,7 +66,8 @@ public class NeoForgeNetworkHandler extends PacketRegistrationHandler {
 
     }
 
-    private <T, K extends CommonPacketWrapper<T>> IPayloadHandler<K> buildHandler(Consumer<PacketContext<T>> handler) {
+    static <T, K extends CommonPacketWrapper<T>> IPayloadHandler<K> buildHandler(Consumer<PacketContext<T>> handler) {
+
         return (payload, ctx) -> {
             try {
                 Side side = ctx.flow().getReceptionSide().equals(LogicalSide.SERVER) ? Side.SERVER : Side.CLIENT;
