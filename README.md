@@ -61,4 +61,6 @@ dependency of the BOMD port.
 
 - `LevelEventScheduler` (per-level event scheduler) is persisted as an empty NBT (same as
   the original: events are not saved across restarts).
-- Oriented hitbox debug rendering (F3+B) is not available until the Gizmos-based mixin is written.
+- Clientbound payload handlers are registered on both `RegisterPayloadHandlersEvent` and the
+  26.1.2-only `RegisterClientPayloadHandlersEvent` (mandatory for the client network registry
+  validation).
