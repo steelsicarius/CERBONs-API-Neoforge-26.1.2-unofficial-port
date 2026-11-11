@@ -52,10 +52,25 @@ dependency of the BOMD port.
 - FML: `FMLLoader.getDist()`/`isProduction()` → static `FMLEnvironment.getDist()`/`isProduction()`.
 - Mixin removed: `EntityRenderDispatcherMixin` (draws oriented hitbox outlines) because
   `EntityRenderDispatcher.renderHitbox` and `LevelRenderer.renderLineBox` no longer exist in
-  26.1.2; the new debug system is Gizmos-based (`EntityHitboxDebugRenderer`). Pending
-  re-implementation with `Gizmos.cuboid`/`GizmoStyle` if oriented-hitbox debug is wanted.
+  26.1.2. Re-implemented with the 26.1.2 Gizmos system instead:
+  `EntityHitboxDebugRendererMixin` injects into the vanilla hitbox debug rendering and draws
+  oriented boxes with `Gizmos.cuboid`/`GizmoStyle` (blue = oriented boxes, green = voxel shape).
 - `META-INF/services` declarations must live in `META-INF/services/` (ServiceLoader-backed
   platform helpers).
+
+## Final status (2026-11-11)
+
+- Port complete and verified: all 96 classes of this source tree compile to bytecode
+  identical to the shipped `cerbons_api-neoforge-26.1.2-1.2.0.jar` (the jar used by the
+  Bosses of Mass Destruction 26.1.2 port), except compiler-version artifacts with no
+  semantic effect.
+- Particle rendering (`SimpleParticle`/`ClientParticleBuilder` over the 26.1.2
+  `SingleQuadParticle` pipeline) confirmed visually in-game: BOMD ability particles render
+  at 1.21 parity (size, color, brightness overrides).
+- The singleplayer interact crash (`MultiplayerGameModeMixin.interactHook`) and the client
+  payload-handler registration are fixed and verified in-game.
+- `JAVA_HOME` in the build command above points to the original dev box (aarch64); on any
+  machine with a JDK 25 toolchain a plain `./gradlew build` is enough.
 
 ## Known limitations
 
